@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+/*-----------------------------Graph Moves-----------------------------*/
+// const int dr[4] = {-1,  0,  0, +1}; // Rook's Move
+// const int dc[4] = { 0, -1, +1,  0}; // Rook's Move
+// const int dr[8] = {-1, -1, -1,  0,  0, +1, +1, +1};  // King's Move
+// const int dc[8] = {-1,  0, +1, -1, +1, -1,  0, +1};  // King's Move
+// const int dr[8] = {-2, -2, -1, -1, +1, +1, +2, +2};  // Knight's Move
+// const int dc[8] = {-1, +1, -2, +2, -2, +2, -1, +1};  // Knight's Move
+/*---------------------------------------------------------------------*/
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>_graphMoves</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

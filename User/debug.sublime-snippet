@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+#ifdef DOPPELLEBEN
+template<typename T1,typename T2> ostream& operator<<(ostream &out,const pair<T1,T2> &p) {return out<<"("<<p.first<<", "<<p.second<<")";}
+template<typename T> auto operator<<(ostream &out,T &&x)->decltype(x.begin(),out) {out<<"{"; for(auto it=x.begin();it!=x.end();++it)out<<*it<<(it==prev(x.end())?"":", "); return out<<"}";}
+void dump() {}
+template<typename T,typename... Args> void dump(T &&x,Args... args) {cerr<<" "<<x; dump(args...);}
+struct ND{~ND(){cerr<<"]\n";}};
+#define dbg(x...) cerr<<" ["<<(strcmp(#x,"")?#x":":""),dump(x),ND(),cerr<<""
+#else
+#define dbg(...) 0 && cerr
+#endif
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>_debug</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,18 @@
+<snippet>
+	<content><![CDATA[
+long long ex(long long x, long long p) {
+	if(x==0) return 0;
+    long long res=1;
+    while(p) {
+    	if(p%2) res*=x;
+    	x*=x;
+    	p/=2;
+    }
+    return res;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>_ex</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

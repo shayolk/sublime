@@ -1,0 +1,43 @@
+<snippet>
+	<content><![CDATA[
+int size(int n) {
+    int b=1;
+    while(b<=n) b*=2;
+    return b;
+}
+
+void build(int node, int st, int ed, vector<int>& tree, vector<int> arr) {
+    if(st==ed) tree[node]=arr[st];
+    else {
+        int mid=st+(ed-st)/2;
+        build(2*node, st, mid, tree, arr);
+        build(2*node+1, mid+1, ed, tree, arr);
+        tree[node]=tree[2*node]+tree[2*node+1];
+    }
+}
+
+void update(int node, int st, int ed, int ind, int val, vector<int>& tree, vector<int> arr) {
+    if(st==ed) {
+        arr[ind]=val;
+        tree[node]=val;
+    }
+    else {
+        int mid=st+(ed-st)/2;
+        if(st<=ind && ind<=mid) update(2*node, st, mid, ind, val, tree, arr);
+        else update(2*node+1, mid+1, ed, ind, val, tree, arr);
+        tree[node]=tree[2*node]+tree[2*node+1];
+    }
+}
+
+int query(int node, int st, int ed, int l, int r, vector<int>& tree) {
+    if(st>r || ed<l) return 0;
+    if(l<=st && ed<=r) return tree[node];
+    int mid=st+(ed-st)/2;
+    return query(2*node, st, mid, l, r, tree)+query(2*node+1, mid+1, ed, l, r, tree);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>_segmentTreeRecursive</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,19 @@
+<snippet>
+	<content><![CDATA[
+long long modex(long long x, long long p, long long m) {
+	if(x==0) return 0;
+    x%=m;
+    long long res=1;
+    while(p) {
+    	if(p%2) res=(res*x)%m;
+    	x=(x*x)%m;
+    	p/=2;
+    }
+    return res;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>_modex</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

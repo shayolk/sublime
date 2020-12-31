@@ -1,0 +1,128 @@
+<snippet>
+	<content><![CDATA[
+template<typename T>
+struct Mod {
+    T x;
+    static T mod;
+    Mod(T v=0) {
+        x=(v%mod+mod)%mod;
+    }
+    // I/O
+    friend istream& operator >> (istream& in, Mod& m) {
+        in>>m.x;
+        m.x=((m.x)%mod+mod)%mod;
+        return in;
+    }
+    friend ostream& operator << (ostream& out, const Mod& m) {
+        return out<<m.x;
+    }
+    // Comparison
+    void operator = (Mod m) {
+        x=(m.x)%mod;
+    }
+    bool operator == (Mod m) {
+        return x==m.x;
+    }
+    bool operator != (Mod m) {
+        return x!=m.x;
+    }
+    bool operator < (Mod m) {
+        return x<m.x;
+    }
+    bool operator <= (Mod m) {
+        return x<=m.x;
+    }
+    bool operator > (Mod m) {
+        return x>m.x;
+    }
+    bool operator >= (Mod m) {
+        return x>=m.x;
+    }
+    // Addition
+    Mod operator + () {
+        Mod res;
+        res.x=x%mod;
+        return res;
+    }
+    Mod operator + (Mod m) {
+        Mod res;
+        res.x=(x+m.x)%mod;
+        return res;
+    }
+    Mod operator ++ () {
+        x=(x+1)%mod;
+        return *this;
+    }
+    void operator += (Mod m) {
+        x=(x+m.x)%mod;
+    }
+    // Subtraction
+    Mod operator - () {
+        Mod res;
+        res.x=(mod-x)%mod;
+        return res;
+    }
+    Mod operator - (Mod m) {
+        Mod res;
+        res.x=(x-m.x+mod)%mod;
+        return res;
+    }
+    Mod operator -- () {
+        x=(x-1+mod)%mod;
+        return *this;
+    }
+    void operator -= (Mod m) {
+        x=(x-m.x+mod)%mod;
+    }
+    // Multiplication
+    Mod operator * (Mod m) {
+        Mod res;
+        res.x=(x*m.x)%mod;
+        return res;
+    }
+    void operator *= (Mod m) {
+        x=(x*m.x)%mod;
+    }
+    // Division
+    Mod inv();
+    Mod operator / (Mod m) {
+        Mod res;
+        res.x=(x*(m.inv().x))%mod;
+        return res;
+    }
+    void operator /= (Mod m) {
+        x=(x*(m.inv().x))%mod;
+    }
+    // Modulo
+    Mod operator % (Mod m) {
+        Mod res;
+        res.x=x%(m.x);
+        return res;
+    }
+    void operator %= (Mod m) {
+        x%=(m.x);
+    }
+    // Exponentiation
+    Mod exp(Mod m) {
+        if(x==0) return Mod(0);
+        T res=1, b=x, e=m.x;
+        b%=mod;
+        while(e) {
+            if(e&1) res=(res*b)%mod;
+            b=(b*b)%mod;
+            e/=2;
+        }
+        return Mod(res);
+    }
+};
+#warning Custom Declarations
+const long long M=1e9+7;
+using mint=Mod<long long>;
+template<typename T> T Mod<T>::mod=M;
+template<typename T> inline Mod<T> Mod<T>::inv() {return exp(mod-2);}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>_modular</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

@@ -1,0 +1,73 @@
+<snippet>
+	<content><![CDATA[
+#include <bits/stdc++.h>
+using namespace std;
+
+#define thegamebegins   ios_base::sync_with_stdio(false); cin.tie(nullptr); //cout.tie(nullptr);
+#define fileio          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
+#define int             long long
+#define float           long double
+#define E               "\n"
+#define S               " "
+#define INF             9e18
+#define PI              (long double)3.141592653589793238L
+#define in(arr,n)       for(int _=0; _<(n); ++_) cin>>arr[_]
+#define fi(i,x,y)       for(int i=(x); i<(y); ++i)
+#define fb(i,x,y)       for(int i=(x); i>=(y); --i)
+#define fa(i,s)         for(auto& i: (s))
+#define fp(i,s)         for(auto i=(s).begin(); i!=(s).end(); ++i)
+#define pf(i,s)         for(auto i=(s).rbegin(); i!=(s).rend(); ++i)
+#define all(s)          (s).begin(), (s).end()
+#define rev(s)          (s).rbegin(), (s).rend()
+#define vc              vector
+#define fr              first
+#define sc              second
+#define pb              push_back
+#define eb              emplace_back
+#define ins             insert
+#define emp             emplace
+
+using ll = long long;
+using ld = long double;
+using vi = vector<int>;
+using vb = vector<bool>;
+using pii = pair<int,int>;
+using mii = map<int,int>;
+using seti = set<int>;
+using vpii = vector<pair<int,int>>;
+using pqmx = priority_queue<int>;
+using pqmn = priority_queue<int,vector<int>,greater<int>>;
+
+template<typename T> T gcd(T a,T b) {return b?gcd(b,a%b):a;}
+template<typename T> inline T lcm(T a,T b) {return (a/gcd(a,b))*b;}
+template<typename T> inline int sz(T &&x) {return (int)(x).size();}
+template<typename T> inline T midl(T l,T r) {return l+(r-l)/2;}
+template<typename T,typename t> inline T minm(T &x,t y) {if(y<x)x=y; return x;}
+template<typename T,typename t> inline T maxm(T &x,t y) {if(y>x)x=y; return x;}
+
+/*__*/
+
+void Main() {
+    
+}
+
+signed main() {
+    thegamebegins
+    // fileio
+    // cout<<fixed<<setprecision(15);
+    
+    int T=1;
+    cin>>T;
+    for(int t=1; t<=T; ++t) {
+        // cout<<"Case #"<<t<<": ";
+        Main();
+    }
+
+    return 0;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>_starter</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
