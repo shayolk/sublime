@@ -1,2 +1,3 @@
 *.exe
 *.out
+*.user-ca-bundle
