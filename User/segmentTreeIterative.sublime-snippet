@@ -6,24 +6,24 @@ int size(int n) {
     return b;
 }
 
-void build(int b, int n, vector<int>& tree, vector<int> arr) {
+void build(int b, int n, vector<int> &tree, vector<int> arr) {
     for(int i=1; i<=n; ++i) tree[b+i]=arr[i];
     for(int node=b-1; node>=1; --node) tree[node]=tree[2*node]+tree[2*node+1];
 }
 
-void update(int ind, int val, int b, vector<int>& tree) {
+void update(int ind, int val, int b, vector<int> &tree) {
     tree[b+ind]=val;
     for(int node=(b+ind)/2; node>=1; node/=2) tree[node]=tree[2*node]+tree[2*node+1];
 }
 
-void modify(int l, int r, int val, int b, vector<int>& tree) {
+void modify(int l, int r, int val, int b, vector<int> &tree) {
     for(l+=b,r+=b+1; l<r; l/=2,r/=2) {
         if(l%2) tree[l++]+=val;
         if(r%2) tree[--r]+=val;
     }
 }
 
-int query(int l, int r, int b, vector<int>& tree) {
+int query(int l, int r, int b, vector<int> &tree) {
     int ans=0;
     for(l+=b,r+=b+1; l<r; l/=2,r/=2) {
         if(l%2) ans+=tree[l++];

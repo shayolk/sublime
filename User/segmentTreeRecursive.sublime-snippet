@@ -6,7 +6,7 @@ int size(int n) {
     return b;
 }
 
-void build(int node, int st, int ed, vector<int>& tree, vector<int> arr) {
+void build(int node, int st, int ed, vector<int> &tree, vector<int> arr) {
     if(st==ed) tree[node]=arr[st];
     else {
         int mid=st+(ed-st)/2;
@@ -16,7 +16,7 @@ void build(int node, int st, int ed, vector<int>& tree, vector<int> arr) {
     }
 }
 
-void update(int node, int st, int ed, int ind, int val, vector<int>& tree, vector<int> arr) {
+void update(int node, int st, int ed, int ind, int val, vector<int> &tree, vector<int> arr) {
     if(st==ed) {
         arr[ind]=val;
         tree[node]=val;
@@ -29,7 +29,7 @@ void update(int node, int st, int ed, int ind, int val, vector<int>& tree, vecto
     }
 }
 
-int query(int node, int st, int ed, int l, int r, vector<int>& tree) {
+int query(int node, int st, int ed, int l, int r, vector<int> &tree) {
     if(st>r || ed<l) return 0;
     if(l<=st && ed<=r) return tree[node];
     int mid=st+(ed-st)/2;

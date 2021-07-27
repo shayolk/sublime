@@ -1,3 +1,8 @@
 *.exe
 *.out
 *.user-ca-bundle
+
+JavaScript/
+Python/
+Tabnine/
+SublimeAStyleFormatter/
