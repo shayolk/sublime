@@ -9,8 +9,9 @@ using namespace std;
 #define float           long double
 #define E               "\n"
 #define S               " "
-#define INF             9e18
+#define INF             INFINITY
 #define PI              (long double)3.141592653589793238L
+#define mset(arr,v)     memset(arr,v,sizeof(arr))
 #define in(arr,n)       for(int _=0; _<(n); ++_) cin>>arr[_]
 #define fi(i,x,y)       for(int i=(x); i<(y); ++i)
 #define fb(i,x,y)       for(int i=(x); i>=(y); --i)
