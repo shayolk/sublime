@@ -10,7 +10,7 @@ vector<int> sieve(int n) {
     return primes;
 }
  
-void seg_sieve(int n, int m) {
+vector<int> seg_sieve(int n, int m) {
     if(n==1) ++n;
     if(m==1) ++m;
     vector<int> v=sieve(sqrt(m)+1);
@@ -22,7 +22,9 @@ void seg_sieve(int n, int m) {
         if(j==i) j+=i;
         for(int k=j; k<=m; k+=i) p[k-n]=false;
     }
-    // for(int i=0; i<N; ++i) if(p[i]) cout<<n+i<<E;
+    vector<int> ret;
+    for(int i=0; i<N; ++i) if(p[i]) ret.emplace_back(n+i);
+    return ret;
 }
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
