@@ -1,0 +1,186 @@
+<snippet>
+	<content><![CDATA[
+// Segment Tree (0-based indexing)
+template<typename T>
+struct SegTree {
+    int n, b;
+    static T iden;
+    vector<T> tree, lazy;
+    bool iter;
+    // initialization
+    SegTree(int len, bool it=false) {
+        n=len;
+        // b=len;
+        b=1;
+        while(b<=n) b*=2;
+        iter=it;
+        tree.assign(2*b, iden);
+        lazy.assign(2*b, 0);
+    }
+    // custom operation for result
+    T op(T, T);
+    // custom operation for modification
+    T mod(T, T, T);
+    // get element at ind iterative
+    T getI(int ind) {
+        return tree[b+ind];
+    }
+    // get element at ind recursive
+    T getR(int ind) {
+        return queryR(1, 0, n-1, ind, ind);
+    }
+    // get utility
+    T get(int ind) {
+        if(iter) getI(ind);
+        return getR(ind);
+    }
+    // build tree iterative
+    void buildI(vector<T>& arr) {
+        for(int i=0; i<n; ++i) {
+            tree[b+i]=arr[i];
+        }
+        for(int node=b-1; node>=1; --node) {
+            tree[node]=op(tree[2*node], tree[2*node+1]);
+        }
+    }
+    // build tree recursive
+    void buildR(int node, int st, int ed, vector<T>& arr) {
+        if(st==ed) {
+            tree[node]=arr[st];
+        }
+        else {
+            int mid=st+(ed-st)/2;
+            buildR(2*node, st, mid, arr);
+            buildR(2*node+1, mid+1, ed, arr);
+            tree[node]=op(tree[2*node], tree[2*node+1]);
+        }
+    }
+    // build utility
+    void build(vector<T>& arr) {
+        if(iter) buildI(arr);
+        buildR(1, 0, n-1, arr);
+    }
+    // single update iterative
+    void updateI(int ind, T val) {
+        tree[b+ind]=mod(tree[b+ind], val, 1);
+        for(int node=(b+ind)/2; node>=1; node/=2) {
+            tree[node]=op(tree[2*node], tree[2*node+1]);
+        }
+    }
+    // single update recursive
+    void updateR(int node, int st, int ed, int ind, T val) {
+        if(st==ed) {
+            tree[node]=mod(tree[node], val, 1);
+        }
+        else {
+            int mid=st+(ed-st)/2;
+            if(st<=ind && ind<=mid) updateR(2*node, st, mid, ind, val);
+            else updateR(2*node+1, mid+1, ed, ind, val);
+            tree[node]=op(tree[2*node], tree[2*node+1]);
+        }
+    }
+    // single update utility
+    void update(int ind, T val) {
+        if(iter) updateI(ind, val);
+        updateR(1, 0, n-1, ind, val);
+    }
+    // push updates to leaves
+    void push() {
+        for (int node=1; node<b; ++node) {
+            tree[2*node]=op(tree[2*node], tree[node]);
+            tree[2*node+1]=op(tree[2*node+1], tree[node]);
+            tree[node]=0;
+        }
+    }
+    // range update iterative
+    void updateI(int l, int r, T val) {
+        for(int node=l; node<=r; ++node) {
+            update(node, val);
+        }
+    }
+    // range update recursive
+    void updateR(int node, int st, int ed, int l, int r, T val) {
+        if(lazy[node]) { 
+            tree[node]=mod(tree[node], lazy[node], (ed-st+1));
+            if(st!=ed) {
+                lazy[node*2]=mod(lazy[node*2], lazy[node], 1);
+                lazy[node*2+1]=mod(lazy[node*2+1], lazy[node], 1);
+            }
+            lazy[node]=iden;
+        }
+        if(st>r || ed<l) return;
+        if(l<=st && ed<=r) {
+            tree[node]=mod(tree[node], val, (ed-st+1));
+            if(st!=ed) {
+                lazy[node*2]=mod(lazy[node*2], val, 1);
+                lazy[node*2+1]=mod(lazy[node*2+1], val, 1);
+            }
+            return;
+        }
+        int mid=st+(ed-st)/2;
+        updateR(2*node, st, mid, l, r, val);
+        updateR(2*node+1, mid+1, ed, l, r, val);
+        tree[node]=op(tree[2*node], tree[2*node+1]);
+        
+    }
+    // range update utility
+    void update(int l, int r, T val) {
+        if(iter) updateI(l, r, val);
+        updateR(1, 0, n-1, l, r, val);
+    }
+    // range query iterative
+    T queryI(int l, int r) {
+        T ans=iden;
+        for(l+=b,r+=b+1; l<r; l/=2,r/=2) {
+            if(l%2) {
+                ans=op(ans, tree[l]);
+                ++l;
+            }
+            if(r%2) {
+                --r;
+                ans=op(ans, tree[r]);
+            }
+        }
+        return ans;
+    }
+    // range query recursive
+    T queryR(int node, int st, int ed, int l, int r) {
+        if(st>r || ed<l) return iden;
+        if(lazy[node]) { 
+            tree[node]=mod(tree[node], lazy[node], (ed-st+1));
+            if(st!=ed) {
+                lazy[node*2]=mod(lazy[node*2], lazy[node], 1);
+                lazy[node*2+1]=mod(lazy[node*2+1], lazy[node], 1);
+            }
+            lazy[node]=iden;
+        }
+        if(l<=st && ed<=r) return tree[node];
+        int mid=st+(ed-st)/2;
+        return op(queryR(2*node, st, mid, l, r), queryR(2*node+1, mid+1, ed, l, r));
+    }
+    // range query utility
+    T query(int l, int r) {
+        if(iter) queryI(l, r);
+        return queryR(1, 0, n-1, l, r);
+    }
+};
+#warning Custom Declarations
+using segtree=SegTree<int>;
+// identity
+template<typename T> T SegTree<T>::iden=0;
+template<typename T> inline T SegTree<T>::op(T x, T y) {
+    // operation
+    T t=x+y;
+    return t;
+}
+template<typename T> inline T SegTree<T>::mod(T x, T y, T l) {
+    // operation
+    T t=x+y*l;
+    return t;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>_segmentTree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>

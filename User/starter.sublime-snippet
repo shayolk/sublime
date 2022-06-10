@@ -3,6 +3,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/*iamsorry*/
+
 #define thegamebegins   ios_base::sync_with_stdio(false); cin.tie(nullptr); //cout.tie(nullptr);
 #define fileio          freopen("input.txt", "r", stdin); freopen("output.txt", "w", stdout);
 #define int             long long
@@ -19,7 +21,7 @@ using namespace std;
 #define pf(i,s)         for(auto i=(s).rbegin(); i!=(s).rend(); ++i)
 #define all(s)          (s).begin(), (s).end()
 #define rev(s)          (s).rbegin(), (s).rend()
-#define vc              vector
+#define vt              vector
 #define fr              first
 #define sc              second
 #define pb              push_back
@@ -31,6 +33,8 @@ using ll = long long;
 using ld = long double;
 using vi = vector<int>;
 using vb = vector<bool>;
+using vs = vector<string>;
+using vvi = vector<vector<int>>;
 using pii = pair<int,int>;
 using mii = map<int,int>;
 using seti = set<int>;
@@ -48,18 +52,19 @@ template<typename T,typename t> inline T maxm(T &x,t y) {if(y>x)x=y; return x;}
 /*__*/
 
 void Main() {
-    
+    $3
 }
 
 signed main() {
     thegamebegins
     // fileio
     // cout<<fixed<<setprecision(15);
+    // init();
     
     int T=1;
-    cin>>T;
+    cin>>T;$1
     for(int t=1; t<=T; ++t) {
-        // cout<<"Case #"<<t<<": ";
+        // cout<<"Case #"<<t<<": ";$2
         Main();
     }
 

@@ -3,10 +3,10 @@
         {
             "name": "C++",
             "extensions": ["cpp"],
-            "compile_cmd": "g++ \"{source_file}\" -std=c++14 -o \"{file_name}\" -DDOPPELLEBEN",
-            "run_cmd": "\"{source_file_dir}\\{file_name}.exe\" {args} -debug",
+            "compile_cmd": "g++ '{source_file}' -std=gnu++14 -o {file_name} -DDOPPELLEBEN",
+            "run_cmd": "./\"{file_name}\" {args} -DDOPPELLEBEN",
 
-            "lint_compile_cmd": "g++ -std=gnu++14 \"{source_file}\" -I \"{source_file_dir}\" -DDOPPELLEBEN"
+            "lint_compile_cmd": "g++ -std=gnu++11 '{source_file}' -I '{source_file_dir}'"
         }
     ]
 }
